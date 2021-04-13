@@ -17,13 +17,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "noResolve": false,
     "baseUrl": "./",
     "sourceMap": true,
-    "outDir": "dist",
   },
   "include": [
-    "src/**/*.ts",
+    "*.ts",
   ],
   "exclude": [
     "src/bot",
