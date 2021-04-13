@@ -17,7 +17,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "noResolve": false,
     "baseUrl": "./",
     "sourceMap": true,
