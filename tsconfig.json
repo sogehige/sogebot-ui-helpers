@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "strict": true,
+    "module": "esnext",
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "incremental": true,
+    "removeComments": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["es2020", "dom"],
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "noResolve": false,
+    "baseUrl": "./",
+    "sourceMap": true,
+    "outDir": "dist",
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "src/bot",
+    "node_modules"
+  ]
+}
