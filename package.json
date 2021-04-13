@@ -4,7 +4,8 @@
   "description": "Common helper functions for sogebot UI",
   "main": "index.js",
   "files": [
-    "*.ts"
+    "*.ts",
+    "*.d.ts"
   ],
   "scripts": {
     "prepublishOnly": "npx tsc",
