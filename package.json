@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Common helper functions for sogebot UI",
   "main": "index.js",
-  "files": [
-    "*.ts",
-    "*.d.ts"
-  ],
   "scripts": {
     "prepublishOnly": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
