@@ -1,5 +1,13 @@
 import axios from 'axios';
 import type { Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
+
+let url = '';
+if (typeof (window as any).io === 'undefined') {
+  console.debug('Setting socket.io to log in on http://localhost:20000');
+  url = 'ws://localhost:20000';
+  (window as any).io = io;
+}
 
 import { setTranslations } from './translate';
 
@@ -23,7 +31,7 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
     return unauthorizedSocket.get(namespace);
   }
 
-  const socket = (window as any).io(namespace, {
+  const socket = (window as any).io(url + namespace, {
     transports: [ 'websocket' ],
     auth:       (cb: (data: { token: string | null}) => void) => {
       cb({ token: localStorage.getItem('accessToken') });
