@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "declaration": false,
+    "declaration": true,
     "noResolve": false,
     "baseUrl": "./",
     "sourceMap": true,
