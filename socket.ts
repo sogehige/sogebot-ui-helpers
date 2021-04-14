@@ -3,7 +3,7 @@ import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 
 let url = '';
-if (location.host.includes('localhost')) {
+if (process.env.isNuxtDev) {
   console.debug('Setting socket.io to log in on http://localhost:20000');
   url = 'ws://localhost:20000';
 }
