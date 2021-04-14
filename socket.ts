@@ -3,7 +3,8 @@ import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 
 let url = '';
-if (typeof (window as any).io === 'undefined') {
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === '') {
   console.debug('Setting socket.io to log in on http://localhost:20000');
   url = 'ws://localhost:20000';
   (window as any).io = io;
