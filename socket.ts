@@ -49,7 +49,7 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
       return;
     }
     console.error(error);
-    if (error.message.includes('malformed') &&
+    if (!error.message.includes('malformed') &&
       (error.message.includes('jwt expired') || (error.message.includes('JsonWebTokenError')))) {
       console.debug('Using refresh token to obtain new access token');
       const refreshToken = localStorage.getItem('refreshToken');
