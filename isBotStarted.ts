@@ -1,8 +1,8 @@
-import { store } from 'src/panel/helpers/store';
+import type { Store } from 'vuex'
 
 let waitAfterStart = false;
 
-function isBotStarted() {
+function isBotStarted(store: Store<any>) {
   return new Promise(resolve => {
     const check = () => {
       fetch('/health')
