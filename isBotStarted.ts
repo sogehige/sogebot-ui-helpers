@@ -2,10 +2,12 @@ import type { Store } from 'vuex'
 
 let waitAfterStart = false;
 
+const url = process.env.isNuxtDev ? 'http://localhost:20000/health' : '/health';
+
 function isBotStarted(store: Store<any>) {
   return new Promise(resolve => {
     const check = () => {
-      fetch('/health')
+      fetch(url)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
