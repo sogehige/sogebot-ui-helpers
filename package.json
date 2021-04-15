@@ -1,6 +1,6 @@
 {
   "name": "@sogebot/ui-helpers",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "Common helper functions for sogebot UI",
   "scripts": {
     "prepublishOnly": "npx tsc"
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
     "lodash-es": "^4.17.21",
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1"
