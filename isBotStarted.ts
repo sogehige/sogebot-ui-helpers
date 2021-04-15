@@ -7,6 +7,8 @@ const url = process.env.isNuxtDev ? 'http://localhost:20000/health' : '/health';
 function isBotStarted(store: Store<any>) {
   return new Promise(resolve => {
     const check = () => {
+      store.commit('setLoadingMsg', 'Connecting to bot.');
+      console.log('Checking bot on ' + url);
       fetch(url)
         .then(response => {
           if (!response.ok) {
@@ -30,7 +32,7 @@ function isBotStarted(store: Store<any>) {
             }, 5000);
           }
         }).catch(() => {
-          store.commit('setLoadingMsg', '... bot is starting ...');
+          store.commit('setLoadingMsg', 'Cannot connect to bot.');
           console.log('Bot not started yet, waiting');
           waitAfterStart = true;
           setTimeout(() => check(), 5000);

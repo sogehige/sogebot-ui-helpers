@@ -90,6 +90,10 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
         redirectLogin();
       } else {
         localStorage.setItem('userType', 'unauthorized');
+        if (error.message.includes('malformed')) {
+          localStorage.setItem('accessToken', '');
+          location.reload();
+        }
       }
     }
   });

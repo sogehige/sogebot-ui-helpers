@@ -51,7 +51,7 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
           console.groupCollapsed('isUserLoggedIn::validate');
           console.groupEnd();
 
-          axios.get(`${window.location.origin}/socket/validate`, {
+          axios.get(`${process.env.isNuxtDev ? 'http://localhost:20000' : window.location.origin}/socket/validate`, {
             headers: {
               'x-twitch-token':  code,
               'x-twitch-userid': data.id,
