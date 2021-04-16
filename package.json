@@ -1,7 +1,8 @@
 {
   "name": "@sogebot/ui-helpers",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Common helper functions for sogebot UI",
+  "type": "module",
   "scripts": {
     "prepublishOnly": "npx tsc"
   },
