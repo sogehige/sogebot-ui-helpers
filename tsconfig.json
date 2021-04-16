@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "strict": true,
-    "module": "esnext",
+    "module": "commonjs",
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "incremental": true,
