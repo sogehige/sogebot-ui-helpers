@@ -1,6 +1,6 @@
 {
   "name": "@sogebot/ui-helpers",
-  "version": "1.6.4",
+  "version": "1.7.0",
   "description": "Common helper functions for sogebot UI",
   "scripts": {
     "prepublishOnly": "npx tsc"
