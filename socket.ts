@@ -12,9 +12,9 @@ import { setTranslations } from './translate';
 
 export const redirectLogin = () => {
   if (window.location.href.includes('popout')) {
-    window.location.assign(window.location.origin + '/login#error=popout+must+be+logged');
+    window.location.assign(window.location.origin + '/credentials/dashboard#error=popout+must+be+logged');
   } else {
-    window.location.assign(window.location.origin + '/login');
+    window.location.assign(window.location.origin + '/credentials/dashboard');
   }
 };
 
@@ -49,8 +49,8 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
       return;
     }
     console.error(error);
-    if (!error.message.includes('malformed') &&
-      (error.message.includes('jwt expired') || (error.message.includes('JsonWebTokenError')))) {
+    if (!error.message.includes('malformed')
+      && (error.message.includes('jwt expired') || (error.message.includes('JsonWebTokenError')))) {
       console.debug('Using refresh token to obtain new access token');
       const refreshToken = localStorage.getItem('refreshToken');
       if (refreshToken === '' || refreshToken === null) {
