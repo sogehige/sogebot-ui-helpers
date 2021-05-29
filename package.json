@@ -1,6 +1,6 @@
 {
   "name": "@sogebot/ui-helpers",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "Common helper functions for sogebot UI",
   "scripts": {
     "prepublishOnly": "npx tsc"
@@ -8,6 +8,7 @@
   "author": "Michal Orlik <sogehige@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/color": "^3.0.1",
     "@types/lodash-es": "^4.17.4",
     "@typescript-eslint/eslint-plugin": "4.22.0",
     "@typescript-eslint/parser": "4.20.0",
