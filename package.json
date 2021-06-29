@@ -11,7 +11,7 @@
     "@types/color": "^3.0.1",
     "@types/lodash-es": "^4.17.4",
     "@typescript-eslint/eslint-plugin": "4.26.0",
-    "@typescript-eslint/parser": "4.26.0",
+    "@typescript-eslint/parser": "4.28.1",
     "eslint": "7.28.0",
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-unused-imports": "1.1.1",
