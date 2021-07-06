@@ -1,4 +1,4 @@
-import { at, isNil } from 'lodash-es';
+import { at, isNil } from 'lodash';
 
 export let translations = {};
 
