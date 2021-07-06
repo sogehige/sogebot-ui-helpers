@@ -1,0 +1,1 @@
+export const baseUrl = process.env.isNuxtDev ? 'http://localhost:20000/' : '/';
