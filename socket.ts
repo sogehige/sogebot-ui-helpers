@@ -12,9 +12,9 @@ import { setTranslations } from './translate';
 
 export const redirectLogin = () => {
   if (window.location.href.includes('popout')) {
-    window.location.assign(window.location.origin + '/credentials/dashboard#error=popout+must+be+logged');
+    window.location.assign(window.location.origin + '/credentials/login#error=popout+must+be+logged');
   } else {
-    window.location.assign(window.location.origin + '/credentials/dashboard');
+    window.location.assign(window.location.origin + '/credentials/login');
   }
 };
 
