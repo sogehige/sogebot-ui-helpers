@@ -69,7 +69,8 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
           socket.disconnect();
           console.debug('Reconnecting with new token');
           socket.connect();
-        }).catch(() => {
+        }).catch((e) => {
+          console.error(e);
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
           localStorage.removeItem('code');
