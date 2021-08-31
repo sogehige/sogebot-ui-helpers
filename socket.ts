@@ -31,7 +31,8 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
   }
 
   if (localStorage.debug) {
-    console.log({
+    console.log('debug', {
+      stack:        new Error().stack,
       type:         'getSocket',
       namespace,
       continueOnUnauthorized,
