@@ -47,7 +47,7 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
       const refreshToken = localStorage.getItem('refreshToken') || '';
       const isNewAuthorization = accessToken.trim().length === 0 || refreshToken.trim().length === 0;
       if (isNewAuthorization) {
-        await new Promise<void>((resolve) => {
+        await new Promise<void>((resolve, reject) => {
           console.groupCollapsed('isUserLoggedIn::validate');
           console.groupEnd();
 
@@ -61,7 +61,7 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
             localStorage.setItem('refreshToken', validation.data.refreshToken);
             localStorage.setItem('userType', validation.data.userType);
             resolve();
-          }).catch(() => resolve());
+          }).catch((e) => reject(e));
         });
       }
 
