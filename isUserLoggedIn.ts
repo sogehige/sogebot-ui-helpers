@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { get } from 'lodash';
 
-export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin = true): Promise<any | boolean | null> {
+export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin = true): Promise<any | boolean | null> {
   // check if we have auth code
   const code = localStorage.getItem('code') || '';
   if (code.trim().length === 0) {
@@ -90,9 +90,11 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
       console.debug(e);
       const data = JSON.parse(localStorage.getItem('cached-logged-user') || 'null');
       if (mustBeLogged) {
-        if (e.message && e.message.toLowerCase().includes('network error') && data) {
-          console.warn('Network error, using cached logged user', data);
-          return data;
+        if (e instanceof Error) {
+          if (e.message && e.message.toLowerCase().includes('network error') && data) {
+            console.warn('Network error, using cached logged user', data);
+            return data;
+          }
         }
         if (e === 'User doesn\'t have access to this endpoint') {
           window.location.assign(window.location.origin + '/credentials/login#error=must+be+caster');
