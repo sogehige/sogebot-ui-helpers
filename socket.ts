@@ -30,6 +30,16 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
     return unauthorizedSocket.get(namespace);
   }
 
+  if (localStorage.debug) {
+    console.log({
+      type:         'getSocket',
+      namespace,
+      continueOnUnauthorized,
+      accessToken:  localStorage.accessToken,
+      refreshToken: localStorage.refreshToken,
+    });
+  }
+
   const socket = io(url + namespace, {
     transports: [ 'websocket' ],
     auth:       (cb: (data: { token: string | null}) => void) => {

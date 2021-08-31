@@ -46,6 +46,17 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
       const accessToken = localStorage.getItem('accessToken') || '';
       const refreshToken = localStorage.getItem('refreshToken') || '';
       const isNewAuthorization = accessToken.trim().length === 0 || refreshToken.trim().length === 0;
+
+      if (localStorage.debug) {
+        console.log({
+          type:         'isUserLoggedIn',
+          isNewAuthorization,
+          userId:       localStorage.userId,
+          accessToken:  localStorage.accessToken,
+          refreshToken: localStorage.refreshToken,
+        });
+      }
+
       if (isNewAuthorization) {
         await new Promise<void>((resolve, reject) => {
           console.groupCollapsed('isUserLoggedIn::validate');
@@ -57,6 +68,9 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
               'x-twitch-userid': data.id,
             },
           }).then(validation => {
+            if (localStorage.debug) {
+              console.log({ validation });
+            }
             localStorage.setItem('accessToken', validation.data.accessToken);
             localStorage.setItem('refreshToken', validation.data.refreshToken);
             localStorage.setItem('userType', validation.data.userType);
