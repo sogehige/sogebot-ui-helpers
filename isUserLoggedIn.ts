@@ -22,6 +22,9 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
   } else {
     try {
       let clientId = localStorage.getItem('clientId') || '';
+      if (localStorage.debug) {
+        console.log('debug::isUserLoggedIn', { clientId });
+      }
       if (clientId.length === 0) {
         // we need first get useless clientId
         const dumbClientIdData = await axios.get(`https://id.twitch.tv/oauth2/validate`, { headers: { 'Authorization': 'OAuth ' + code } });
