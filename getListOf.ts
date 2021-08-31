@@ -27,6 +27,9 @@ const list: getListOfReturn = {
 };
 export const populateListOf = async function<P extends possibleLists>(type: P): Promise<void> {
   return new Promise<void>((resolve) => {
+    if (localStorage.debug) {
+      console.log('populateListOf - getSocket on / only authorized')
+    }
     getSocket('/').emit(type, (err: string | null, data: getListOfReturn['systems']) => {
       if (err) {
         console.error(err);

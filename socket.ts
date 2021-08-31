@@ -36,7 +36,17 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
       type:         'getSocket',
       namespace,
       continueOnUnauthorized,
-      accessToken:  localStorage.accessToken,
+      accessToken:  localStorage.accessToken,"Error
+    at f (http://localhost:20000/_nuxt/d2e588d.js:2:53813)
+    at Module.573 (http://localhost:20000/_nuxt/ed0a18e.js:1:27733)
+    at n (http://localhost:20000/_nuxt/b35505c.js:1:578)
+    at Object.361 (http://localhost:20000/_nuxt/ed0a18e.js:1:4080)
+    at n (http://localhost:20000/_nuxt/b35505c.js:1:578)
+    at Object.<anonymous> (http://localhost:20000/_nuxt/d2e588d.js:2:129609)
+    at n (http://localhost:20000/_nuxt/b35505c.js:1:578)
+    at Module.<anonymous> (http://localhost:20000/_nuxt/d2e588d.js:2:432138)
+    at Module.<anonymous> (http://localhost:20000/_nuxt/d2e588d.js:2:443905)
+    at n (http://localhost:20000/_nuxt/b35505c.js:1:578)"
       refreshToken: localStorage.refreshToken,
     });
   }
@@ -128,6 +138,9 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
 }
 
 export const getTranslations = async () => {
+  if (localStorage.debug) {
+    console.log('getTranslations - getSocket on / allows unauthorized')
+  }
   getSocket('/', true).emit('translations', (translations: any) => {
     if (process.env.IS_DEV) {
       console.groupCollapsed('GET=>Translations');
