@@ -2,8 +2,10 @@ function getDecimals (value: string | number) {
   return String(value).split('.')[1] ?? '';
 }
 
-function format (thousandsDelimiter = '', decimalsDelimiter = '.', precision = 2) {
+function format (thousandsDelimiter = '', precision = 2) {
   return (value: number): string => {
+    const decimalsDelimiter = thousandsDelimiter === '.' ? ',' : '.';
+
     let generatedNumber = '';
     const decimals = getDecimals(value);
     const decimalsLength = decimals.length > 0 ? decimals.length + 1 : 0;
