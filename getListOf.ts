@@ -4,6 +4,7 @@ export interface getListOfReturn {
   systems: {
     name: string; enabled: boolean; areDependenciesEnabled: boolean; isDisabledByEnv: boolean;
   }[];
+  services: { name: string }[];
   core: { name: string }[];
   integrations: {
     name: string; enabled: boolean; areDependenciesEnabled: boolean; isDisabledByEnv: boolean;
@@ -16,10 +17,11 @@ export interface getListOfReturn {
   }[];
 }
 
-type possibleLists = 'systems' | 'core' | 'integrations' | 'overlays' | 'games';
+type possibleLists = 'systems' | 'core' | 'integrations' | 'overlays' | 'games' | 'services';
 
 const list: getListOfReturn = {
   systems:      [],
+  services:     [],
   core:         [],
   integrations: [],
   overlays:     [],
@@ -28,7 +30,7 @@ const list: getListOfReturn = {
 export const populateListOf = async function<P extends possibleLists>(type: P): Promise<void> {
   return new Promise<void>((resolve) => {
     if (localStorage.debug) {
-      console.log('populateListOf - getSocket on / only authorized')
+      console.log('populateListOf - getSocket on / only authorized');
     }
     getSocket('/').emit(type, (err: string | null, data: getListOfReturn['systems']) => {
       if (err) {
