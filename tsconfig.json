@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "strict": true,
-    "module": "commonjs",
+    "target": "ES2018",
+    "module": "ESNext",
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "incremental": true,
     "removeComments": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "lib": ["es2020", "dom"],
+    "lib": [ "ESNext" ],
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -20,10 +19,22 @@
     "noResolve": false,
     "baseUrl": "./",
     "sourceMap": true,
+    "paths": {
+      "~/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./*"
+      ],
+      "@entity/*": [
+        "../backend/src/database/entity/*"
+      ]
+    },
   },
   "include": [
     "*.ts",
     "**/*.ts",
+    "../backend/d.ts/helpers/*"
   ],
   "exclude": [
     "src/bot",

@@ -2,6 +2,8 @@ import axios from 'axios';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 
+import type { Fn, ClientToServerEventsWithNamespace } from '../backend/d.ts/src/helpers/socket';
+
 let url = '';
 if (process.env.isNuxtDev) {
   console.debug('Setting socket.io to log in on http://localhost:20000');
@@ -18,10 +20,10 @@ export const redirectLogin = () => {
   }
 };
 
-const authorizedSocket = new Map<string, any>();
-const unauthorizedSocket = new Map<string, any>();
+const authorizedSocket = new Map<string | number | symbol, any>();
+const unauthorizedSocket = new Map<string | number | symbol, any>();
 
-export function getSocket(namespace: string, continueOnUnauthorized = false): Socket {
+export function getSocket<K0 extends keyof O, O extends Record<PropertyKey, Record<PropertyKey, Fn>> = ClientToServerEventsWithNamespace> (namespace: K0, continueOnUnauthorized = false): Socket<O[K0]> {
   if (authorizedSocket.has(namespace)) {
     return authorizedSocket.get(namespace);
   }
@@ -41,7 +43,7 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
     });
   }
 
-  const socket = io(url + namespace, {
+  const socket = io(url + (namespace as string), {
     transports: [ 'websocket' ],
     auth:       (cb: (data: { token: string | null}) => void) => {
       cb({ token: localStorage.getItem('accessToken') });
@@ -96,7 +98,7 @@ export function getSocket(namespace: string, continueOnUnauthorized = false): So
       }
     } else {
       if (error.message.includes('Invalid namespace')) {
-        throw new Error(error.message + ' ' + namespace);
+        throw new Error(error.message + ' ' + (namespace as string));
       }
       if (!continueOnUnauthorized) {
         redirectLogin();
@@ -131,7 +133,7 @@ export const getTranslations = async () => {
   if (localStorage.debug) {
     console.log('getTranslations - getSocket on / allows unauthorized')
   }
-  getSocket('/', true).emit('translations', (translations: any) => {
+  getSocket('/', true).emit('translations', (translations) => {
     if (process.env.IS_DEV) {
       console.groupCollapsed('GET=>Translations');
       console.debug({ translations });
@@ -146,7 +148,7 @@ type Configuration = {
 };
 export const getConfiguration = async (): Promise<Configuration> => {
   return new Promise<Configuration>((resolve) => {
-    getSocket('/core/ui', true).emit('configuration', (err: string | null, configuration: Configuration) => {
+    getSocket('/core/ui', true).emit('configuration', (err, configuration) => {
       if (err) {
         return console.error(err);
       }

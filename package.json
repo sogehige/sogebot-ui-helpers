@@ -3,20 +3,30 @@
   "version": "2.8.0",
   "description": "Common helper functions for sogebot UI",
   "scripts": {
-    "prepublishOnly": "npx tsc"
+    "postinstall": "(npm link ../backend || true)",
+    "prepublishOnly": "npm build",
+    "build": "npx tsc",
+    "release": "standard-version && git push --follow-tags origin main",
+    "release:major": "standard-version -r major && git push --follow-tags origin main"
   },
   "author": "Michal Orlik <sogehige@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@twurple/chat": "^5.0.18",
     "@types/color": "^3.0.2",
+    "@types/validator": "^13.7.1",
     "@typescript-eslint/eslint-plugin": "4.30.0",
     "@typescript-eslint/parser": "4.30.0",
+    "discord.js": "^13.6.0",
     "eslint": "7.32.0",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-unused-imports": "1.1.4",
     "husky": "^6.0.0",
+    "standard-version": "^9.3.2",
     "tslib": "^2.3.1",
+    "typeorm": "^0.2.45",
     "typescript": "^4.4.2",
+    "validator": "^13.7.0",
     "vue": "^2.6.14",
     "vuex": "^3.6.2"
   },
