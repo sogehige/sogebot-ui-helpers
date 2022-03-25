@@ -6,8 +6,8 @@
     "postinstall": "(npm link ../backend || true)",
     "prepublishOnly": "npm run build",
     "build": "npx tsc",
-    "release": "standard-version && git push --follow-tags origin main",
-    "release:major": "standard-version -r major && git push --follow-tags origin main"
+    "release": "standard-version && git push --follow-tags origin master",
+    "release:major": "standard-version -r major && git push --follow-tags origin master"
   },
   "author": "Michal Orlik <sogehige@gmail.com>",
   "license": "ISC",
