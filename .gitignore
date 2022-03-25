@@ -1,5 +1,6 @@
 .husky
 node_modules
 tsconfig.tsbuildinfo
-*.js*
+*.js
+*.js.map
 *.d.ts
