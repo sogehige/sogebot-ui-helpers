@@ -32,7 +32,7 @@ export function shadowGenerator(shadow: {
   opacity: number;
   color: string;
 }[] | undefined) {
-  const output = [];
+  const output: string[] = [];
   if (shadow) {
     for (const s of shadow) {
       output.push(`${s.shiftRight}px ${s.shiftDown}px ${s.blur}px ${Color(s.color).alpha(s.opacity / 100)}`);

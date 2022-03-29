@@ -147,7 +147,7 @@ type Configuration = {
   [x:string]: Configuration | string;
 };
 export const getConfiguration = async (): Promise<Configuration> => {
-  return new Promise<Configuration>((resolve) => {
+  return new Promise<Configuration>((resolve, reject) => {
     getSocket('/core/ui', true).emit('configuration', (err, configuration) => {
       if (err) {
         return console.error(err);
@@ -157,7 +157,11 @@ export const getConfiguration = async (): Promise<Configuration> => {
         console.debug({ configuration });
         console.groupEnd();
       }
-      resolve(configuration);
+      if (configuration) {
+        resolve(configuration);
+      } else {
+        reject();
+      }
     });
   });
 };
