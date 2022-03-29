@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "strict": true,
+    "strictPropertyInitialization": false,
     "module": "commonjs",
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
