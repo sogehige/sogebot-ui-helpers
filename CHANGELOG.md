@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.3](https://github.com/sogebot/sogebot.dev/compare/v3.0.2...v3.0.3) (2022-03-29)
+
+
+### Bug Fixes
+
+* **tsconfig:** revert module settings ([9aa1c8b](https://github.com/sogebot/sogebot.dev/commit/9aa1c8b73634c1bcb9e8fec0f6c01b55ee2248b9))
+
 ### [3.0.2](https://github.com/sogebot/sogebot.dev/compare/v2.8.1...v3.0.2) (2022-03-25)
 
 ### [3.0.1](https://github.com/sogebot/sogebot.dev/compare/v4.0.0...v3.0.1) (2022-03-25)
