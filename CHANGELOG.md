@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.5](https://github.com/sogebot/sogebot.dev/compare/v3.0.4...v3.0.5) (2022-03-29)
+
+
+### Bug Fixes
+
+* build fixes ([2df1966](https://github.com/sogebot/sogebot.dev/commit/2df1966844f6d65e56e6400f17ee2b06c7073f38))
+
 ### [3.0.4](https://github.com/sogebot/sogebot.dev/compare/v3.0.3...v3.0.4) (2022-03-29)
 
 
