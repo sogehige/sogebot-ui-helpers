@@ -3,7 +3,7 @@
   "version": "3.0.6",
   "description": "Common helper functions for sogebot UI",
   "scripts": {
-    "postinstall": "(npm link ../backend || true)",
+    "postinstall": "(npm link ../backend || (exit 0))",
     "prepublishOnly": "npm run build",
     "build": "npx tsc",
     "release": "standard-version && git push --follow-tags origin master",
