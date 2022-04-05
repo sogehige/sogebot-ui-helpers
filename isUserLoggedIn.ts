@@ -1,10 +1,8 @@
-import axios from 'axios';
-import { get } from 'lodash';
-
 export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin = true): Promise<any | boolean | null> {
   // check if we have auth code
-  const code = localStorage.getItem('code') || '';
-  if (code.trim().length === 0) {
+  const user = JSON.parse(localStorage.getItem('cached-logged-user') || 'null');
+  const accessToken = localStorage.getItem('accessToken') || '';
+  if (accessToken.trim().length === 0 || !user) {
     if (mustBeLogged) {
       console.log('Redirecting, user is not authenticated');
       sessionStorage.setItem('goto-after-login', location.href);
@@ -21,69 +19,6 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
     }
   } else {
     try {
-      let clientId = localStorage.getItem('clientId') || '';
-      if (localStorage.debug) {
-        console.log('debug::isUserLoggedIn', { clientId });
-      }
-      if (clientId.length === 0 || clientId === 'undefined' /* sometimes if twitch is down it can set to undefined */) {
-        // we need first get useless clientId
-        const dumbClientIdData = await axios.get(`https://id.twitch.tv/oauth2/validate`, { headers: { 'Authorization': 'Bearer ' + code } });
-        clientId = dumbClientIdData.data.client_id;
-        localStorage.setItem('clientId', clientId);
-      }
-
-      const axiosData = await axios.get(`https://api.twitch.tv/helix/users`, {
-        headers: {
-          'Authorization': 'Bearer ' + code,
-          'Client-Id':     clientId,
-        },
-      });
-      const data = get(axiosData, 'data.data[0]', null);
-      if (data === null) {
-        localStorage.removeItem('userId');
-        throw Error('User must be logged');
-      }
-      localStorage.setItem('userId', data.id);
-
-      // get new authorization if we are missing access or refresh tokens
-      const accessToken = localStorage.getItem('accessToken') || '';
-      const refreshToken = localStorage.getItem('refreshToken') || '';
-      const isNewAuthorization = accessToken.trim().length === 0 || refreshToken.trim().length === 0;
-
-      if (localStorage.debug) {
-        console.log({
-          type:         'isUserLoggedIn',
-          isNewAuthorization,
-          userId:       localStorage.userId,
-          accessToken:  localStorage.accessToken,
-          refreshToken: localStorage.refreshToken,
-        });
-      }
-
-      if (isNewAuthorization) {
-        await new Promise<void>((resolve, reject) => {
-          console.groupCollapsed('isUserLoggedIn::validate');
-          console.groupEnd();
-
-          const headers = {
-            'x-twitch-token':  code,
-            'x-twitch-userid': data.id,
-          }
-
-          axios.get(`${process.env.isNuxtDev ? 'http://localhost:20000' : window.location.origin}/socket/validate`, {
-            headers,
-          }).then(validation => {
-            console.group('isUserLoggedIn::validation');
-            console.debug({ validation, headers });
-            console.groupEnd();
-            localStorage.setItem('accessToken', validation.data.accessToken);
-            localStorage.setItem('refreshToken', validation.data.refreshToken);
-            localStorage.setItem('userType', validation.data.userType);
-            resolve();
-          }).catch((e) => reject(e));
-        });
-      }
-
       if (mustBeAdmin) {
         await new Promise<void>((resolve, reject) => {
           const check = () => {
@@ -103,16 +38,13 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
           check();
         });
       }
-      localStorage.setItem('cached-logged-user', JSON.stringify(data));
-      return data;
     } catch(e) {
       console.error(e);
-      const data = JSON.parse(localStorage.getItem('cached-logged-user') || 'null');
       if (mustBeLogged) {
         if (e instanceof Error) {
-          if (e.message && typeof e.message === 'string' && e.message.toLowerCase().includes('network error') && data) {
-            console.warn('Network error, using cached logged user', data);
-            return data;
+          if (e.message && typeof e.message === 'string' && e.message.toLowerCase().includes('network error') && user) {
+            console.warn('Network error, using cached logged user', user);
+            return user;
           }
         }
         if (e === 'User doesn\'t have access to this endpoint') {
@@ -126,7 +58,7 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
           }
         }
       }
-      return data;
     }
+    return user;
   }
 };
