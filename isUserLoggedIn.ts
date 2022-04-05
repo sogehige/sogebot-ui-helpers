@@ -65,15 +65,17 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
           console.groupCollapsed('isUserLoggedIn::validate');
           console.groupEnd();
 
+          const headers = {
+            'x-twitch-token':  code,
+            'x-twitch-userid': data.id,
+          }
+
           axios.get(`${process.env.isNuxtDev ? 'http://localhost:20000' : window.location.origin}/socket/validate`, {
-            headers: {
-              'x-twitch-token':  code,
-              'x-twitch-userid': data.id,
-            },
+            headers,
           }).then(validation => {
-            if (localStorage.debug) {
-              console.log({ validation });
-            }
+            console.group('isUserLoggedIn::validation');
+            console.debug({ validation, headers });
+            console.groupEnd();
             localStorage.setItem('accessToken', validation.data.accessToken);
             localStorage.setItem('refreshToken', validation.data.refreshToken);
             localStorage.setItem('userType', validation.data.userType);
@@ -104,11 +106,11 @@ export const isUserLoggedIn = async function (mustBeLogged = true, mustBeAdmin =
       localStorage.setItem('cached-logged-user', JSON.stringify(data));
       return data;
     } catch(e) {
-      console.debug(e);
+      console.error(e);
       const data = JSON.parse(localStorage.getItem('cached-logged-user') || 'null');
       if (mustBeLogged) {
         if (e instanceof Error) {
-          if (e.message && e.message.toLowerCase().includes('network error') && data) {
+          if (e.message && typeof e.message === 'string' && e.message.toLowerCase().includes('network error') && data) {
             console.warn('Network error, using cached logged user', data);
             return data;
           }

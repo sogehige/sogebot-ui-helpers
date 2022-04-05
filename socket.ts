@@ -75,6 +75,9 @@ export function getSocket<K0 extends keyof O, O extends Record<PropertyKey, Reco
         }
       } else {
         axios.get(`${process.env.isNuxtDev ? 'http://localhost:20000' : window.location.origin}/socket/refresh`, { headers: { 'x-twitch-token': refreshToken } }).then(validation => {
+          console.group('socket::validation');
+          console.debug({ validation, refreshToken });
+          console.groupEnd();
           localStorage.setItem('accessToken', validation.data.accessToken);
           localStorage.setItem('refreshToken', validation.data.refreshToken);
           localStorage.setItem('userType', validation.data.userType);
