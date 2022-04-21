@@ -1,6 +1,6 @@
 {
   "name": "@sogebot/ui-helpers",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "Common helper functions for sogebot UI",
   "scripts": {
     "postinstall": "(npm link ../backend || (exit 0))",
