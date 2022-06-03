@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 import type { Fn, ClientToServerEventsWithNamespace } from '../backend/d.ts/src/helpers/socket';
 
 let url = '';
-if (process.env.isNuxtDev) {
+if (process.env.isNuxtDev || process.env.NODE_ENV === 'development') {
   console.debug('Setting socket.io to log in on http://localhost:20000');
   url = 'ws://localhost:20000';
 }
