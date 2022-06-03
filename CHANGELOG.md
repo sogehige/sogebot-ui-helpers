@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/sogebot/sogebot.dev/compare/v3.0.7...v3.1.0) (2022-06-03)
+
+
+### Features
+
+* **queryFilter:** add service to itemsToEvalPart ([9d312c8](https://github.com/sogebot/sogebot.dev/commit/9d312c8258c7d694bc7ba7a6ef3c2c16450ee96e))
+
+
+### Bug Fixes
+
+* add debug messages to validation ([c324997](https://github.com/sogebot/sogebot.dev/commit/c324997134aa65531b0af8818787003793fc75b4))
+* **isUserLoggedIn:** simplify login check ([d774d83](https://github.com/sogebot/sogebot.dev/commit/d774d83931a355f84224b73df4885c09f251649c))
+* update socket dev ([8cb03b3](https://github.com/sogebot/sogebot.dev/commit/8cb03b3e17a080b592a4e596592be06a24b90a0c))
+
 ### [3.0.7](https://github.com/sogebot/sogebot.dev/compare/v3.0.6...v3.0.7) (2022-03-30)
 
 ### [3.0.6](https://github.com/sogebot/sogebot.dev/compare/v3.0.5...v3.0.6) (2022-03-29)
