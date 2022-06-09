@@ -32,7 +32,7 @@ export const populateListOf = async function<P extends possibleLists>(type: P): 
     if (localStorage.debug) {
       console.log('populateListOf - getSocket on / only authorized');
     }
-    getSocket('/').emit('populateListOf', type, (err, data: any) => {
+    getSocket('/').emit('populateListOf', type, (err: any, data: any) => {
       if (err) {
         console.error(err);
       }
