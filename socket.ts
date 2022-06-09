@@ -4,12 +4,6 @@ import { io } from 'socket.io-client';
 
 import type { Fn, ClientToServerEventsWithNamespace } from '../backend/d.ts/src/helpers/socket';
 
-let url = '';
-if (process.env.isNuxtDev || process.env.NODE_ENV === 'development') {
-  console.debug('Setting socket.io to log in on http://localhost:20000');
-  url = 'ws://localhost:20000';
-}
-
 import { setTranslations } from './translate';
 
 export const redirectLogin = () => {
@@ -43,7 +37,7 @@ export function getSocket<K0 extends keyof O, O extends Record<PropertyKey, Reco
     });
   }
 
-  const socket = io(url + (namespace as string), {
+  const socket = io(sessionStorage.wsUrl + (namespace as string), {
     transports: [ 'websocket' ],
     auth:       (cb: (data: { token: string | null}) => void) => {
       cb({ token: localStorage.getItem('accessToken') });
